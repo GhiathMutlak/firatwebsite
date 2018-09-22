@@ -15,7 +15,7 @@ return [
     |
     */
 
-    'default' => env('LOG_CHANNEL', 'stack'),
+  /*  'default' => env('LOG_CHANNEL', 'stack'),*/
 
     /*
     |--------------------------------------------------------------------------
@@ -32,6 +32,7 @@ return [
     |
     */
 
+    /*
     'channels' => [
         'stack' => [
             'driver' => 'stack',
@@ -41,6 +42,17 @@ return [
         'single' => [
             'driver' => 'single',
             'path' => storage_path('logs/laravel.log'),
+            'level' => 'debug',
+        ],
+*/
+    'default' => env('LOG_CHANNEL', 'stack'),
+    'channels' => [
+        'stack' => [
+            'driver' => 'stack',
+            'channels' => ['single'],
+        ],
+        'single' => [
+            'driver' => 'errorlog',
             'level' => 'debug',
         ],
 
