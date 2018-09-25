@@ -41,12 +41,12 @@ return [
 
         'mysql' => [
             'driver' => 'mysql',
-            'host' => env('DB_HOST', '127.0.0.1'),
-            'port' => env('DB_PORT', '3306'),
-            'database' => env('DB_DATABASE', 'hello_laravel_heroku'),
-            'username' => env('DB_USERNAME', 'root'),
-            'password' => env('DB_PASSWORD', 'root'),
-            'unix_socket' => env('DB_SOCKET', ''),
+            'host' => '127.0.0.1',
+            'port' => '3306',
+            'database' => 'hello_laravel_heroku',
+            'username' => 'root',
+            'password' => 'root',
+            'unix_socket' =>  '',
             'charset' => 'utf8',
             'collation' => 'utf8_unicode_ci',
             'prefix' => '',

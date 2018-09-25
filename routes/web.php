@@ -18,3 +18,5 @@ Route::get('/about', 'PagesController@about');
 Route::get('/proLanguage', 'PagesController@proLanguage' );
 
 Route::get('/index', 'PagesController@index' );
+
+Route::resource('posts', 'PostsController' );
