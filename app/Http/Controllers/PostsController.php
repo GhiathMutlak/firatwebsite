@@ -7,6 +7,17 @@ use App\Post;
 
 class PostsController extends Controller
 {
+
+    /**
+     * Create a new controller instance.
+     *
+     * @return void
+     */
+    public function __construct()
+    {
+        $this->middleware('auth', [ 'except'=> ['index','show'] ]);
+    }
+
     /**
      * Display a listing of the resource.
      *
@@ -44,10 +55,11 @@ class PostsController extends Controller
         ]);
 
         $post = new Post();
-        $post->subject = $request->input('subject');
+        $post->subject    = $request->input('subject');
         $post->first_name = $request->input('first_name');
-        $post->last_name = $request->input('last_name');
-        $post->body = $request->input('body');
+        $post->last_name  = $request->input('last_name');
+        $post->body       = $request->input('body');
+        $post->user_id       = auth()->user()->id;
         $post->save();
 
         return redirect('/posts')->with('success', 'Done successfully');
@@ -75,6 +87,10 @@ class PostsController extends Controller
     public function edit($id)
     {
         $post = Post::find($id);
+
+        if ( auth()->user()->id !== $post->user_id )
+            return redirect('posts')->with( 'error', 'Unauthorized');
+
         return view('posts.edit')->with('post',$post);
     }
 
@@ -106,6 +122,10 @@ class PostsController extends Controller
     public function destroy($id)
     {
         $post = Post::find($id);
+
+        if ( auth()->user()->id !== $post->user_id )
+            return redirect('posts')->with( 'error', 'Unauthorized');
+
         $post->delete();
 
         return redirect('/posts')->with('success', 'Done successfully');

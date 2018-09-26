@@ -1,4 +1,4 @@
-@extends('layout.app')
+@extends('layouts.app')
 
 @section('content')
 
@@ -13,9 +13,12 @@
 
                                 <div class="card-header">
                                     {{$post->first_name}}  {{$post->last_name}}
-                                    <a class="btn btn-info" href="/posts/{{$post->id}}/edit">
+
+                                    @if( !Auth::guest() && Auth::user()->id == $post->user_id )
+                                    <a class="btn btn-info float-right" href="/posts/{{$post->id}}/edit">
                                         Edit
                                     </a>
+                                    @endif
 
                                 </div>
 
@@ -28,18 +31,19 @@
                                     </p>
 
                                     <span class="badge badge-danger">
-                                    {{$post->created_at}}
-                                </span>
+                                    {{$post->created_at}} by {{$post->user->name}}
+                                    </span>
 
                                     <a class="btn btn-info float-right" href="/posts/">
                                         Back
                                     </a>
 
+                                    @if( !Auth::guest() && Auth::user()->id == $post->user_id )
                                     {{ Form::open(['action' => ['PostsController@destroy', $post->id], 'method'=>'post']) }}
                                     {{ Form::hidden( '_method', 'DELETE' ) }}
                                     {{ Form::submit('Delete', [ 'class' => 'btn btn-danger ' ])}}
                                     {{ Form::close() }}
-
+                                    @endif
 
                                 </div>
                             </div>

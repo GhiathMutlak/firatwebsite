@@ -20,3 +20,7 @@ Route::get('/proLanguage', 'PagesController@proLanguage' );
 Route::get('/index', 'PagesController@index' );
 
 Route::resource('posts', 'PostsController' );
+
+Auth::routes();
+
+Route::get('/dashboard', 'DashboardController@index')->name('dashboard');

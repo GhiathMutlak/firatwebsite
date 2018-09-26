@@ -1,4 +1,4 @@
-@extends('layout.app')
+@extends('layouts.app')
 
 @section('content')
 
@@ -31,7 +31,7 @@
                                 </p>
 
                                 <span class="badge badge-danger">
-                                    {{$post->created_at}}
+                                    {{$post->created_at}} by {{$post->user->name}}
                                 </span>
 
                                 <a class="pull-right btn btn-info" href="/posts/{{$post->id}}">
